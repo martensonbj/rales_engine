@@ -27,6 +27,7 @@ namespace :initialize do
 
       invoice_items_file = 'vendor/assets/data/invoice_items.csv'
       CSV.foreach(invoice_items_file, :headers =>true, header_converters: :symbol) do |row|
+        row[:unit_price] = row[:unit_price].to_f/100
         InvoiceItem.create! row.to_h
       end
 
