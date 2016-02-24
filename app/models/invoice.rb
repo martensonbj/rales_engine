@@ -5,8 +5,11 @@ class Invoice < ActiveRecord::Base
   has_many :transactions
   has_many :invoice_items
 
-  def self.successful
-    joins(:transactions).where(transactions: {result: "success"})
-  end
-
+def self.successful(date = nil)
+successful = joins(:transactions).where(transactions: {result: "success"})
+if date
+successful = successful.where(created_at: date)
+end
+successful
+end
 end
