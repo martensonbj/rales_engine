@@ -10,6 +10,7 @@ Rails.application.routes.draw do
           get 'random', to: 'merchants/random#show'
         end
         member do
+          get 'revenue', to: 'merchants/revenue#show'
           get 'items', to: 'merchants/items#index'
           get 'invoices', to: 'merchants/invoices#index'
         end
