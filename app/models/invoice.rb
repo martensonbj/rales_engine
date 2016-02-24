@@ -4,8 +4,6 @@ class Invoice < ActiveRecord::Base
   has_many :items, through: :invoice_items
   has_many :transactions
   has_many :invoice_items
-<<<<<<< Updated upstream
-=======
 
   validates :status, presence: true
 
@@ -28,5 +26,4 @@ class Invoice < ActiveRecord::Base
       acc + item.unit_price.to_f * item.quantity
     end
   end
->>>>>>> Stashed changes
 end

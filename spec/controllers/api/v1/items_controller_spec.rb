@@ -4,8 +4,8 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
   describe "GET index" do
     it "shows all items" do
       merchant = Merchant.create(name: "Merchant1")
-      item1 = Item.create(name: "Item1", description: "Item description 1", merchant_id: merchant.id)
-      item2 = Item.create(name: "Item2", description: "Item description 2", merchant_id: merchant.id)
+      item1 = Item.create(name: "Item1", description: "Item description 1", merchant_id: merchant.id, unit_price: 100.10)
+      item2 = Item.create(name: "Item2", description: "Item description 2", merchant_id: merchant.id, unit_price: 100.10)
       get :index, format: :json
 
       items = JSON.parse(response.body, symbolize_names: true)
@@ -21,8 +21,8 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
     describe "GET show" do
       it "shows a single items" do
         merchant = Merchant.create(name: "Merchant1")
-        item1 = Item.create(name: "Item1", description: "Item description 1", merchant_id: merchant.id)
-        item2 = Item.create(name: "Item2", description: "Item description 2", merchant_id: merchant.id)
+        item1 = Item.create(name: "Item1", description: "Item description 1", merchant_id: merchant.id, unit_price: 100.10)
+        item2 = Item.create(name: "Item2", description: "Item description 2", merchant_id: merchant.id, unit_price: 100.10)
         item = Item.all.last
 
         get :show, format: :json, id: item.id

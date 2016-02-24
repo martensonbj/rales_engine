@@ -1,8 +1,6 @@
 class Merchant < ActiveRecord::Base
   has_many :items
   has_many :invoices
-<<<<<<< Updated upstream
-=======
 
   validates :name, presence: true
 
@@ -12,5 +10,4 @@ class Merchant < ActiveRecord::Base
     end.round(2)
   end
 
->>>>>>> Stashed changes
 end
