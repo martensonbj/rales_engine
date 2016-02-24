@@ -1,12 +1,15 @@
-# GET /api/v1/merchants/most_revenue?quantity=x
-# returns the top x merchants ranked by total revenue
-
 class Api::V1::Merchants::MostRevenueController < ApplicationController
   respond_to :json
 
   def index
-    quantity = params.first[1]
+    merchants = Merchant.all.map do |merchant|
+      {'id' => merchant.id, 'name' => merchant.name, 'revenue' => merchant.get_revenue(params[:date])}
+    end
 
+    merchants.sort_by! do |merchant|
+      - merchant['revenue']
+    end
+
+    respond_with merchants[0..(params[:quantity].to_i - 1)]
   end
-
 end
