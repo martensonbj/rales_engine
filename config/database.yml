@@ -81,5 +81,4 @@ test:
 production:
   <<: *default
   database: rales_engine_production
-  username: rales_engine
-  password: <%= ENV['RALES_ENGINE_DATABASE_PASSWORD'] %>
+  
