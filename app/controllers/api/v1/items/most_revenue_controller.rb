@@ -2,14 +2,17 @@ class Api::V1::Items::MostRevenueController < ApplicationController
   respond_to :json
 
   def index
-    items = Item.all.map do |item|
-      {'id' => item.id, 'name' => item.name, 'revenue' => item.get_revenue(params[:date])}
-    end
+    quantity = params[:quantity].to_i
+    result =  Invoice.is_successful
+              .joins(:invoice_items)
+              .limit(params[:quantity])
+              .order("sum(unit_price * quantity) desc")
+              .group(:item_id)
+              .sum("unit_price * quantity")
+              .to_a
+              .map {|id, revenue| {"id" => id, "name" => Item.find(id).name}}
 
-    items.sort_by! do |item|
-      - item['revenue']
-    end
-
-    respond_with items[0..(params[:quantity].to_i - 1)]
+    respond_with result
   end
+
 end

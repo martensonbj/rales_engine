@@ -5,9 +5,7 @@ class Merchant < ActiveRecord::Base
   validates :name, presence: true
 
   def get_revenue(date)
-    invoices.successful(date).reduce(0) do |acc, invoice|
-      acc + invoice.get_revenue
-    end.round(2)
+    invoices.successful(date).get_invoice_revenue
   end
 
 end
