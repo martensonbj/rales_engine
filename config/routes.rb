@@ -18,7 +18,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :customers, only: [:index, :show], defaults: {format: :json}do
+      resources :customers, only: [:index, :show], defaults: {format: :json} do
         collection do
           get 'find', to: 'customers/find#show'
           get 'random', to: 'customers/random#show'
@@ -27,10 +27,11 @@ Rails.application.routes.draw do
         member do
           get 'invoices', to: 'customers/invoices#index'
           get 'transactions', to: 'customers/transactions#index'
+          get 'favorite_merchant', to: 'customers/favorite_merchant#index'
         end
       end
 
-      resources :items, only: [:index, :show], defaults: {format: :json}do
+      resources :items, only: [:index, :show], defaults: {format: :json} do
         collection do
           get 'find', to: 'items/find#show'
           get 'random', to: 'items/random#show'

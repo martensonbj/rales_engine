@@ -3,30 +3,28 @@ require 'rails_helper'
 RSpec.describe Api::V1::MerchantsController, type: :controller do
   describe "GET index" do
     it "shows all items" do
-      merchant = Merchant.create(name: "Merchant1")
-      merchant = Merchant.create(name: "Merchant2")
+      merchants = create_merchant(2)
       get :index, format: :json
 
       merchants = JSON.parse(response.body, symbolize_names: true)
 
       assert_response :success
-      expect(merchants.first[:name]).to eq("Merchant1")
-      expect(merchants.last[:name]).to eq("Merchant2")
+      expect(merchants.first[:name]).to eq("Merchant_Name_0")
+      expect(merchants.last[:name]).to eq("Merchant_Name_1")
       expect(merchants.count).to eq 2
     end
   end
 
   describe "GET show" do
     it "shows a single items" do
-      merchant1 = Merchant.create(name: "Merchant1")
-      merchant2 = Merchant.create(name: "Merchant2")
-      merchant = Merchant.all.first
+      merchants = create_merchant(2)
+      merchant = merchants.first
       get :show, format: :json, id: merchant.id
 
       merchants = JSON.parse(response.body, symbolize_names: true)
 
       assert_response :success
-      expect(merchant[:name]).to eq("Merchant1")
+      expect(merchant[:name]).to eq("Merchant_Name_0")
       expect(merchants.count).to eq 4
     end
   end
