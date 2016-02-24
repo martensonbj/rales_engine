@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "is invalid without a name" do
+    merchant = Merchant.new
+    expect(merchant).to be_invalid
+  end
 end

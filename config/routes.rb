@@ -35,6 +35,7 @@ Rails.application.routes.draw do
           get 'find', to: 'items/find#show'
           get 'random', to: 'items/random#show'
           get 'find_all', to: 'items/find_all#index'
+          get 'most_revenue', to: 'items/most_revenue#index'
         end
         member do
           get 'invoice_items', to: 'items/invoice_items#index'
