@@ -7,6 +7,19 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+def create_customer(num)
+  num.times do |i|
+    Customer.create(first_name: "First#{i}", last_name: "Last#{i}")
+  end
+end
+#
+# def create_item(num)
+#   num.times do |i|
+#     random_id = rand(20)
+#     Item.create(name: "Item#{i}", description: "This is my description for Item#{i}", merchant_id: "#{random_id}")
+#   end
+# end
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

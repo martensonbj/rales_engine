@@ -2,19 +2,38 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::ItemsController, type: :controller do
   describe "GET index" do
-    it "renders the index template" do
-      get :index
-      expect(response).to render_template("index")
+    it "shows all items" do
+      merchant = Merchant.create(name: "Merchant1")
+      item1 = Item.create(name: "Item1", description: "Item description 1", merchant_id: merchant.id)
+      item2 = Item.create(name: "Item2", description: "Item description 2", merchant_id: merchant.id)
+      get :index, format: :json
+
+      items = JSON.parse(response.body, symbolize_names: true)
+
+      assert_response :success
+      expect(items.first[:name]).to eq("Item1")
+      expect(items.first[:description]).to eq("Item description 1")
+      expect(items.last[:name]).to eq("Item2")
+      expect(items.last[:description]).to eq("Item description 2")
+      expect(items.count).to eq 2
     end
 
-    it "shows all items" do
-      get :index, format: :json
-      item1 = Item.create(:item)
-      item2 = create(:item)
-      items = Json.parse(response.body)
+    describe "GET show" do
+      it "shows a single items" do
+        merchant = Merchant.create(name: "Merchant1")
+        item1 = Item.create(name: "Item1", description: "Item description 1", merchant_id: merchant.id)
+        item2 = Item.create(name: "Item2", description: "Item description 2", merchant_id: merchant.id)
+        item = Item.all.last
 
-      expect(page).to have_content("name1")
-      expect(page).to have_content("name2")
+        get :show, format: :json, id: item.id
+
+        items = JSON.parse(response.body, symbolize_names: true)
+
+        assert_response :success
+        expect(item[:name]).to eq("Item2")
+        expect(item[:description]).to eq("Item description 2")
+        expect(items.count).to eq 7
+      end
     end
 
   end
