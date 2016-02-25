@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::Transactions::InvoicesController, type: :controller do
   describe "GET show" do
-    it "shows the associated item per invoice_item" do
+    it "shows the associated invoices per transaction" do
       transaction = create_transaction.first
 
       get :show, format: :json, id: transaction.id

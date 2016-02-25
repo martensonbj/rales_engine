@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::Items::ItemsController, type: :controller do
+RSpec.describe Api::V1::Items::InvoiceItemsController, type: :controller do
   describe "GET index" do
-    it "shows the associated item per invoice_item" do
+    it "shows the associated invoice items per item" do
       item = create_item.first
       invoice_items = create_invoice_item(10)
 
