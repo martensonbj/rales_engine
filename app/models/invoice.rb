@@ -17,12 +17,6 @@ class Invoice < ActiveRecord::Base
     successful
   end
 
-  # def get_revenue
-  #   invoice_items.reduce(0) do |acc, item|
-  #     acc + item.unit_price.to_f * item.quantity
-  #   end
-  # end
-
   def self.get_invoice_revenue
     joins(:invoice_items).sum("unit_price * quantity")
   end

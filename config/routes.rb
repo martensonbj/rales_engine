@@ -15,6 +15,7 @@ Rails.application.routes.draw do
           get 'revenue', to: 'merchants/revenue#show'
           get 'items', to: 'merchants/items#index'
           get 'invoices', to: 'merchants/invoices#index'
+          get 'favorite_customer', to: 'merchants/favorite_customer#show'
         end
       end
 
@@ -27,7 +28,7 @@ Rails.application.routes.draw do
         member do
           get 'invoices', to: 'customers/invoices#index'
           get 'transactions', to: 'customers/transactions#index'
-          get 'favorite_merchant', to: 'customers/favorite_merchant#index'
+          get 'favorite_merchant', to: 'customers/favorite_merchant#show'
         end
       end
 

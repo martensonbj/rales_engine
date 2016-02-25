@@ -1,7 +1,7 @@
 class Api::V1::Customers::FavoriteMerchantController < ApplicationController
   respond_to :json
 
-  def index
+  def show
     customer = Customer.find(params[:id])
     invoices = customer.invoices.is_successful
     ranked_invoices = invoices.select('merchant_id, count(merchant_id) as frequency').
