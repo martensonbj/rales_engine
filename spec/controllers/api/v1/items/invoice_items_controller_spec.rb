@@ -11,10 +11,9 @@ RSpec.describe Api::V1::Items::InvoiceItemsController, type: :controller do
       get :index, format: :json, id: item.id
 
       json_response = JSON.parse(response.body, symbolize_names: true)
-
       assert_response :success
-      expect(json_response.first[:name]).to eq("Item_Name_0")
-      expect(json_response.count).to eq 11
+      expect(json_response.first[:item_id]).to eq(item.id)
+      expect(json_response.count).to eq 10
     end
   end
 

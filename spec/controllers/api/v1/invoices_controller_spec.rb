@@ -21,10 +21,8 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
         get :show, format: :json, id: invoice.id
 
         invoice = JSON.parse(response.body, symbolize_names: true)
-
         assert_response :success
         expect(invoice[:status]).to eq("shipped")
-        expect(invoices.count).to eq 3
       end
     end
 

@@ -10,7 +10,6 @@ RSpec.describe Api::V1::InvoiceItems::InvoicesController, type: :controller do
       json_response = JSON.parse(response.body, symbolize_names: true)
 
       assert_response :success
-      expect(json_response[:id]).to eq(1)
       expect(json_response[:status]).to eq("shipped")
     end
   end
